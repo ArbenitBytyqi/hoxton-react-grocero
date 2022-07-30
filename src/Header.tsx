@@ -1,4 +1,16 @@
-export function Header({ store, getItemImagePath, increaseCartQuantity }) {
+import { StoreItem, StoreType } from "./App";
+
+type Props = {
+  store: StoreType;
+  getItemImagePath: (item: StoreItem) => void;
+  increaseCartQuantity: (item: StoreItem) => void;
+};
+
+export function Header({
+  store,
+  getItemImagePath,
+  increaseCartQuantity,
+}: Props) {
   return (
     <header id="store">
       <h1>Grocero</h1>

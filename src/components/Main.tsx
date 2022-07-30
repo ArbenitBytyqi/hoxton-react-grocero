@@ -1,10 +1,20 @@
+import { StoreItem, StoreType } from "../App";
+
+type Props = {
+  cart: StoreItem[];
+  getItemImagePath: (item: StoreItem) => void;
+  decreaseCartQuantity: (item: StoreItem) => void;
+  increaseCartQuantity: (item: StoreItem) => void;
+  getTotal: any;
+};
+
 export function Main({
   cart,
   getItemImagePath,
   decreaseCartQuantity,
   increaseCartQuantity,
   getTotal,
-}) {
+}: Props) {
   return (
     <main id="cart">
       <h2>Your Cart</h2>

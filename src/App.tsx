@@ -4,6 +4,16 @@ import "./App.css";
 import { Header } from "./Header";
 import { Main } from "./components/Main";
 
+export type StoreItem = {
+  id: number;
+  name: string;
+  price: number;
+  stock: number;
+  inCart: number;
+};
+
+export type StoreType = StoreItem;
+
 function App() {
   const [store, setStore] = useState([
     {
@@ -80,7 +90,7 @@ function App() {
 
   const cart = getCartItems();
 
-  function getItemImagePath(item: any) {
+  function getItemImagePath(item: StoreItem) {
     let id = String(item.id).padStart(3, "0");
     return `assets/icons/${id}-${item.name}.svg`;
   }
@@ -97,19 +107,19 @@ function App() {
     return total;
   }
 
-  function increaseCartQuantity(item) {
+  function increaseCartQuantity(item: StoreItem) {
     if (item.stock === 0) return;
     const storeCopy = structuredClone(store);
-    const match = storeCopy.find((target) => target.id === item.id);
+    const match = storeCopy.find((target: any) => target.id === item.id);
     match.inCart++;
     match.stock--;
     setStore(storeCopy);
   }
 
-  function decreaseCartQuantity(item) {
+  function decreaseCartQuantity(item: StoreItem) {
     if (item.inCart < 1) return;
     const storeCopy = structuredClone(store);
-    const match = storeCopy.find((target) => target.id === item.id);
+    const match = storeCopy.find((target: any) => target.id === item.id);
     match.inCart--;
     match.stock++;
     setStore(storeCopy);
