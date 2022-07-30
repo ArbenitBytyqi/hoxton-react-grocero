@@ -1,6 +1,8 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
+import { Header } from "./Header";
+import { Main } from "./components/Main";
 
 function App() {
   const [store, setStore] = useState([
@@ -115,71 +117,19 @@ function App() {
 
   return (
     <div className="App">
-      <header id="store">
-        <h1>Grocero</h1>
-        <ul className="item-list store--item-list">
-          {store.map((item) => (
-            <li>
-              <div className=".store--item-icon">
-                <img src={getItemImagePath(item)} />
-              </div>
-              <button
-                onClick={function () {
-                  increaseCartQuantity(item);
-                }}
-              >
-                Add to cart ({item.stock})
-              </button>
-            </li>
-          ))}
-        </ul>
-      </header>
+      <Header
+        store={store}
+        getItemImagePath={getItemImagePath}
+        increaseCartQuantity={increaseCartQuantity}
+      />
 
-      <main id="cart">
-        <h2>Your Cart</h2>
-
-        <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
-            {cart.map((item) => (
-              <li>
-                <img
-                  className="cart--item-icon"
-                  src={getItemImagePath(item)}
-                  alt={item.name}
-                />
-                <p>{item.name}</p>
-                <button
-                  className="quantity-btn remove-btn center"
-                  onClick={function () {
-                    decreaseCartQuantity(item);
-                  }}
-                >
-                  -
-                </button>
-                <span className="quantity-text center">{item.inCart}</span>
-                <button
-                  className="quantity-btn add-btn center"
-                  onClick={function () {
-                    increaseCartQuantity(item);
-                  }}
-                >
-                  +
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="total-section">
-          <div>
-            <h3>Total</h3>
-          </div>
-
-          <div>
-            <span className="total-number">{getTotal().toFixed(2)} €</span>
-          </div>
-        </div>
-      </main>
+      <Main
+        cart={cart}
+        getItemImagePath={getItemImagePath}
+        decreaseCartQuantity={decreaseCartQuantity}
+        increaseCartQuantity={increaseCartQuantity}
+        getTotal={getTotal}
+      />
     </div>
   );
 }
